@@ -101,7 +101,7 @@ body{
 	color: white;
 	font-family: Arial;
 	font-weight: bolder;
-	font-size: 2vw;
+	font-size: 40px;
 
 	transition: .25s;
 }
@@ -221,12 +221,28 @@ button a{
 	display: inline-block;
 	margin: .25vw;
 	position: relative;
+	transition: .2s;
+	display: inline-flex;
+}
+
+.white-logo-circle:hover{
+	width: 7.5vw;
+	height: 7.5vw;
+	margin: -2.5vw -1vw -3.25vw -1vw;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.white-logo-circle:hover img{
+	width: 6vw;
+	height: 6vw;
+	margin: auto;
+	border-radius: 1.5vw;
 }
 
 .white-logo-circle img{
 	width: 3vw;
 	height: 3vw;
-	position: relative;
-	left: 1vw;
-	top: 1vw;
+	transition: .2s;
+	margin: auto;
 }

@@ -36,8 +36,14 @@
 			</div>
 		</div>
 		<div id='main-content-parties'>
-			<p>Deze partijen doen mee</p>
-			<script type="text/javascript" src="script/parties.js"></script>
+			<div id='div-1'>
+				<p>Deze partijen doen mee</p>
+				<script type="text/javascript" src="script/activeParties.js"></script>
+			</div>
+			<div id='div-2'>
+				<p>Deze partijen doen niet mee</p>
+				<script type="text/javascript" src="script/nonActiveParties.js"></script>
+			</div>
 		</div>
 	</div>
 </body>
