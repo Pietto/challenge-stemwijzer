@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stemwijzer bitfchesss</title>
+	<link rel="stylesheet" type="text/css" href="styling/styling.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+	<script src="http://stemwijzer.dvc-icta.nl/data.js"></script>
+	<!-- <script type="text/javascript" src="script/script.js"></script> -->
+
+
+	<div id='main-content'>
+		<div id='main-content-content'>
+			<img src="img/stemwijzer-logo.png" alt='stemwijzer logo'>
+			<h2 id='stemwijzer-logo-text'>StemWijzer Tweede Kamer 2020</h2>
+			<h1 id='stemwijzer-logo-header'>Test uw politieke voorkeur aan de hand van 30 stellingen</h1>
+			<div id='main-content-startdiv'>
+				<div id='main-content-startdiv-subdiv'>
+					<span class="main-content-span" id='main-content-span-1'>
+						<img class='start-page-icons' id='start-page-icon-1' src="img/person-circle.png" alt='icon'>
+						<p>Bekijk de toegankelijke versie voor mensen met een visuele beperking</p>	
+					</span>
+					<span class="main-content-span" id='main-content-span-2'>
+						<img class='start-page-icons' id='start-page-icon-2' src="img/lock.svg" alt='icon'>
+						<p>De StemWijzer maakt geen gebruik van cookies. Klik hier voor de volledige privacy statement</p>	
+					</span>
+				</div>
+				<span id='main-content-button-span'>
+					<button><a href="questions.php">Start</a></button>
+				</span>
+			</div>
+			<div id='main-content-bottom'>
+				<a href="questions.php" id='dark-grey' style='color:rgb(172,172,172)'>Of blik terug met de <span style='color:rgb(75,75,75)'>Stemmen</span>Tracker</a>
+				<p>Wat hebben de partijen in het verleden waargemaakt van hun verkiezingsbeloften? 'Track' uw stem met de Stemmentracker, een website die terugblikt op 30 Tweede Kamerstemmingen van de afgelopen regeerperiode. Met welke partij stemde u mee?</p>
+			</div>
+		</div>
+		<div id='main-content-parties'>
+			<p>Deze partijen doen mee</p>
+			<script type="text/javascript" src="script/parties.js"></script>
+		</div>
+	</div>
+</body>
+</html>
