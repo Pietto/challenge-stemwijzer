@@ -228,7 +228,7 @@ button a{
 .white-logo-circle:hover{
 	width: 7.5vw;
 	height: 7.5vw;
-	margin: -2.5vw -1vw -3.25vw -1vw;
+	margin: -2.5vw -1vw .5vw -1vw;
 	z-index: 1;
 	cursor: pointer;
 }
