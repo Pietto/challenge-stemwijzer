@@ -7,7 +7,6 @@
 </head>
 <body>
 	<script src="http://stemwijzer.dvc-icta.nl/data.js"></script>
-	<!-- <script type="text/javascript" src="script/script.js"></script> -->
 
 
 	<div id='main-content'>
@@ -46,5 +45,6 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="script/script.js"></script>
 </body>
 </html>

@@ -8,6 +8,23 @@ function backButton(){
 	}
 }
 
+var jack = document.getElementById("start-page-icon-1");
+
+jack.onmouseover = function(){
+	setInterval(function(){
+		jack.src="img/person-circle-jack.png";
+		setTimeout(function(){
+		jack.src="img/person-circle.png";
+		},250);
+	},500);
+	jack.src="img/person-circle-jack.png";
+}
+jack.onmouseout = stopInterval
+
+function stopInterval(){
+	alert('sadf');
+}
+
 console.log(subjects);
 
 function move(x) {
