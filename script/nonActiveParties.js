@@ -4,5 +4,3 @@ var abbreviationsNonActive = ['gp','jl','snl','pvmes','vdp'];
 for(i=0; i<subjects.length-abbreviationsActive.length-2; i++){
 	document.getElementById('div-2').innerHTML += '<div class="white-logo-circle"><img src="img/logos/' + abbreviationsNonActive[i] + '.png"></div>';
 }
-
-console.log(document.getElementById('div-2'))

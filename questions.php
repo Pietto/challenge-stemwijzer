@@ -25,15 +25,31 @@
 				<button id='skip' onclick='skip()'>sla deze vraag over ➟</button>
 			</div>
 			<div id='partyOpinions'>
-				<div id='partyOpinions-header'>
-					<a onclick="openOpinions()"><img src='img/opinions.svg' alt='icon'>Wat vinden de partijen?</a>
-				</div>
-				<div id='partyOpinions-opinions'>
-					
-				</div>
+				<details>
+					<div>
+						<summary><img src='img/opinions.svg' alt='icon'>Wat vinden de partijen?</summary>
+						<div>
+							<h4 id='eensExplanationHeader'>Eens</h4>
+						</div>
+						<div>
+							<h4 id='geenExplanationHeader'>Geen van beide</h4>
+						</div>
+						<div>
+							<h4 id='oneensExplenationHeader'>Oneens</h4>
+						</div>
+					</div>
+				</details>
 			</div>
 		</div>
 	</div>
+
+	<details>
+		<summary>title</summary>
+		<details>
+			<summary>another title</summary>
+			<p>actual content</p>
+		</details>
+	</details>
 
 	<script type="text/javascript" src="script/script.js"></script>
 </body>
