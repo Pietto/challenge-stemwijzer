@@ -111,21 +111,38 @@ function updateProgressBar(){
 updateOpinions();
 function updateOpinions(){
 	//wipe all content first
-	document.getElementById('eensExplanationHeader').parentElement.innerHTML = '<h4 id="eensExplanationHeader">Eens</h4>';
-	document.getElementById('geenExplanationHeader').parentElement.innerHTML = '<h4 id="geenExplanationHeader">Eens</h4>';
-	document.getElementById('oneensExplenationHeader').parentElement.innerHTML = '<h4 id="oneensExplenationHeader">Oneens</h4>';
+	var eeh = document.getElementById('eensExplanationHeader');
+	var geh = document.getElementById('geenExplanationHeader');
+	var oeh = document.getElementById('oneensExplenationHeader');
+	eeh.parentElement.innerHTML = '<h4 id="eensExplanationHeader">Eens</h4>';
+	geh.parentElement.innerHTML = '<h4 id="geenExplanationHeader">Eens</h4>';
+	oeh.parentElement.innerHTML = '<h4 id="oneensExplenationHeader">Oneens</h4>';
 
 	//add new content
 	Object.keys(subjects[count].parties).forEach(function(key) {
 		if(subjects[count].parties[key].position == 'pro'){
-			var eeh = document.getElementById('eensExplanationHeader');
 			eeh.parentElement.innerHTML += '<detail><summary>title</summary><p>opinions</p></detail>';
 		}else if(subjects[count].parties[key].position == 'none'){
-			var geh = document.getElementById('geenExplanationHeader');
-			geh.parentElement.innerHTML += '<p class="opinions">'+subjects[count].parties[key].name+'</p>';
+			oeh.parentElement.innerHTML += '<p class="opinions">'+subjects[count].parties[key].name+'</p>';
 		}else if(subjects[count].parties[key].position == 'contra'){
-			var geh = document.getElementById('oneensExplenationHeader');
-			geh.parentElement.innerHTML += '<p class="opinions">'+subjects[count].parties[key].name+'</p>';
+			oeh.parentElement.innerHTML += '<p class="opinions">'+subjects[count].parties[key].name+'</p>';
 		}
+
+		//switch statement (not tested yet)
+		//should replace if else statement documented above
+
+		/*switch(subjects[count].parties[key].position){
+			case 'pro':
+				eeh.parentElement.innerHTML += '<detail><summary><title></summary><p>opinions</p></detail>';
+				break;
+			case 'none':
+				geh.parentElement.innerHTML += '<p class="opinions">'+subjects[count].parties[key].name+'</p>';
+				break;
+			case 'contra':
+				oeh.parentElement.innerHTML += '<p class="opinions">'+subjects[count].parties[key].name+'</p>';
+				break;
+			default:
+				console.log('something went wrong aperantly');
+		}*/
 	});
 }
