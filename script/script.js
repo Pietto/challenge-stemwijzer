@@ -1,4 +1,9 @@
 //backbutton mouseover event 
+
+var answers = [];
+for(i=0; i<subjects.length; i++){
+	answers.push('');
+}
  
 function backButton(){ 
 	if(count == 0){ 
@@ -6,7 +11,12 @@ function backButton(){
 	}else{ 
 		goToLastQuestion(); 
 	} 
-} 
+}
+
+var button1 = document.getElementById('yes');
+var button2 = document.getElementById('none');
+var button3 = document.getElementById('no');
+var button4 = document.getElementById('skip');
 
 
 //developer tool to check the subjects object
@@ -57,44 +67,55 @@ setTimeout(function(){
 
 //function when the statement has been agreed upon
 function eens(){ 
-	console.log(count); 
+	answers[count]='eens';
 	count++ 
 	updateItems();
 } 
 
 //function when no choice has been made
 function geenKeuze(){ 
-	console.log(count); 
+	answers[count]='geenKeuze';
 	count++ 
 	updateItems();
 }
 
 //function when the statement has been rejected
-function oneens(){ 
-	console.log(count); 
+function oneens(){
+	answers[count]='oneens';
 	count++
 	updateItems();
 }
 
 //function when the statement has been skipped
-function skip(){ 
-	console.log(count); 
+function skip(){
+	answers[count]='skip';
 	count++ 
 	updateItems();
 } 
 
 //function to go the the last question
 function goToLastQuestion(){ 
-	count-- 
-	updateText(); 
-	updateProgressBar(); 
+	count--
+	updateItems();
 } 
 
 //defines all functions that should update/change content
 function updateItems(){
-	updateText(); 
-	updateProgressBar(); 
-	updateOpinions();
+	if(count>=30){
+		var txt;
+		var r = confirm("Weet u zeker dat u naar de resultaten wilt gaan?");
+		if (r == true) {
+			alert("You pressed OK!");
+		} else {
+			alert("You pressed Cancel!"); 
+		}
+		document.getElementById("demo").innerHTML = txt;
+	}else{
+		updateText(); 
+		updateProgressBar(); 
+		// updateOpinions();
+		checkAnswer();
+	}
 }
 
 //updates the title+subtitle
@@ -115,34 +136,36 @@ function updateOpinions(){
 	var geh = document.getElementById('geenExplanationHeader');
 	var oeh = document.getElementById('oneensExplenationHeader');
 	eeh.parentElement.innerHTML = '<h4 id="eensExplanationHeader">Eens</h4>';
-	geh.parentElement.innerHTML = '<h4 id="geenExplanationHeader">Eens</h4>';
+	geh.parentElement.innerHTML = '<h4 id="geenExplanationHeader">Geen van beide</h4>';
 	oeh.parentElement.innerHTML = '<h4 id="oneensExplenationHeader">Oneens</h4>';
 
 	//add new content
-	Object.keys(subjects[count].parties).forEach(function(key) {
-		if(subjects[count].parties[key].position == 'pro'){
-			eeh.parentElement.innerHTML += '<detail><summary>title</summary><p>opinions</p></detail>';
-		}else if(subjects[count].parties[key].position == 'none'){
-			oeh.parentElement.innerHTML += '<p class="opinions">'+subjects[count].parties[key].name+'</p>';
-		}else if(subjects[count].parties[key].position == 'contra'){
-			oeh.parentElement.innerHTML += '<p class="opinions">'+subjects[count].parties[key].name+'</p>';
+	
+}
+
+function checkAnswer(){
+	console.log(count);
+	if(answers[count] != ""){
+		removeHighlights();
+		switch(answers[count]){
+			case 'eens':
+			button1.classList.add("activeButton");
+			break;
+			case 'geenKeuze':
+			button2.classList.add("activeButton");
+			break;
+			case 'oneens':
+			button3.classList.add("activeButton");
+			break;
+			case 'skip':
+			button4.classList.add("activeButton");
 		}
+	}
+}
 
-		//switch statement (not tested yet)
-		//should replace if else statement documented above
-
-		/*switch(subjects[count].parties[key].position){
-			case 'pro':
-				eeh.parentElement.innerHTML += '<detail><summary><title></summary><p>opinions</p></detail>';
-				break;
-			case 'none':
-				geh.parentElement.innerHTML += '<p class="opinions">'+subjects[count].parties[key].name+'</p>';
-				break;
-			case 'contra':
-				oeh.parentElement.innerHTML += '<p class="opinions">'+subjects[count].parties[key].name+'</p>';
-				break;
-			default:
-				console.log('something went wrong aperantly');
-		}*/
-	});
+function removeHighlights(){
+	button1.classList.remove('activeButton');
+	button2.classList.remove('activeButton');
+	button3.classList.remove('activeButton');
+	button4.classList.remove('activeButton');
 }

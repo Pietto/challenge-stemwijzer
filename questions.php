@@ -26,17 +26,30 @@
 			</div>
 			<div id='partyOpinions'>
 				<details>
+					<summary><img src='img/opinions.svg' alt='icon'>Wat vinden de partijen?</summary>
 					<div>
-						<summary><img src='img/opinions.svg' alt='icon'>Wat vinden de partijen?</summary>
-						<div>
-							<h4 id='eensExplanationHeader'>Eens</h4>
-						</div>
-						<div>
-							<h4 id='geenExplanationHeader'>Geen van beide</h4>
-						</div>
-						<div>
-							<h4 id='oneensExplenationHeader'>Oneens</h4>
-						</div>
+						<h4 id='eensExplanationHeader'>Eens</h4>
+						<p>a</p>
+						<p>a</p>
+						<p>a</p>
+						<p>a</p>
+						<p>a</p>
+					</div>
+					<div>
+						<h4 id='geenExplanationHeader'>Geen van beide</h4>
+						<p>a</p>
+						<p>a</p>
+						<p>a</p>
+						<p>a</p>
+						<p>a</p>
+					</div>
+					<div>
+						<h4 id='oneensExplenationHeader'>Oneens</h4>
+						<p>a</p>
+						<p>a</p>
+						<p>a</p>
+						<p>a</p>
+						<p>a</p>
 					</div>
 				</details>
 			</div>
@@ -45,6 +58,14 @@
 
 	<details>
 		<summary>title</summary>
+		<details>
+			<summary>another title</summary>
+			<p>actual content</p>
+		</details>
+		<details>
+			<summary>another title</summary>
+			<p>actual content</p>
+		</details>
 		<details>
 			<summary>another title</summary>
 			<p>actual content</p>

@@ -141,6 +141,10 @@ button a{
 	transition: .25s;
 }
 
+#backbutton-div img:hover{
+	cursor: pointer;
+}
+
 #main-content-content h1{
 	color: rgb(1,180,220);
 	font-family: arial;
@@ -249,7 +253,7 @@ details h4{
 
 details div{
 	display: inline-block;
-	width: 28%;
+	width: 25%;
 	margin: 2.45%;
 	background-color: rgb(200,200,200);
     vertical-align: top;
@@ -292,4 +296,16 @@ details div{
 	height: 3vw;
 	transition: .2s;
 	margin: auto;
+}
+
+
+
+.active{
+	background-color: yellow;
+}
+
+
+.activeButton{
+	background-color: rgba(1,180,220,1) !important;
+	border-radius: 7.5px !important;
 }
