@@ -17,6 +17,10 @@
 			<div id='main-content-content'>
 				<h1 id='main-content-content-h1'>SOMETHING WENT WRONG</h1>
 				<h2 id='main-content-content-h2'>SOMETHING WENT MORE WRONG</h2>
+			<div id='endscreen'>
+				<h1 id='main-content-content-h1'>Zijn er onderwerpen die u extra belangrijk vindt?</h1>
+				<h2 id='main-content-content-h2'>Aangevinkte stellingen tellen extra mee bij het berekenen van het resulaat.</h2>
+			</div>
 			</div>
 			<div id='button-div'>
 				<button id='yes' onclick='eens()'>eens</button>
@@ -24,53 +28,16 @@
 				<button id='no' onclick='oneens()'>oneens</button>
 				<button id='skip' onclick='skip()'>sla deze vraag over ➟</button>
 			</div>
-			<div id='partyOpinions'>
-				<details>
-					<summary><img src='img/opinions.svg' alt='icon'>Wat vinden de partijen?</summary>
-					<div>
-						<h4 id='eensExplanationHeader'>Eens</h4>
-						<p>a</p>
-						<p>a</p>
-						<p>a</p>
-						<p>a</p>
-						<p>a</p>
-					</div>
-					<div>
-						<h4 id='geenExplanationHeader'>Geen van beide</h4>
-						<p>a</p>
-						<p>a</p>
-						<p>a</p>
-						<p>a</p>
-						<p>a</p>
-					</div>
-					<div>
-						<h4 id='oneensExplenationHeader'>Oneens</h4>
-						<p>a</p>
-						<p>a</p>
-						<p>a</p>
-						<p>a</p>
-						<p>a</p>
-					</div>
-				</details>
-			</div>
 		</div>
 	</div>
 
-	<details>
+	<!-- <details>
 		<summary>title</summary>
 		<details>
 			<summary>another title</summary>
 			<p>actual content</p>
 		</details>
-		<details>
-			<summary>another title</summary>
-			<p>actual content</p>
-		</details>
-		<details>
-			<summary>another title</summary>
-			<p>actual content</p>
-		</details>
-	</details>
+	</details> -->
 
 	<script type="text/javascript" src="script/script.js"></script>
 </body>

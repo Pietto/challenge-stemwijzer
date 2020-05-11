@@ -194,72 +194,6 @@ button a{
 	float: right;
 }
 
-/*#partyOpinions-header{
-	display: inline-block;
-	padding-left: 3vw;
-}
-
-#partyOpinions-header a{
-	font-family: arial;
-	font-size: 1.5vw;
-}
-
-#partyOpinions-header{
-	transition: .2s;
-}
-
-#partyOpinions-header:hover{
-	cursor: pointer;
-	color: rgb(1,180,220);
-}
-
-#partyOpinions-header img{
-	width: 2.5vw;
-}*/
-
-#partyOpinions summary{
-	display: inline-block;
-}
-
-#partyOpinions img{
-	width: 3vw;
-}
-
-/*
-	*remove the expand icon
-*/
-
-details summary::-webkit-details-marker {
-    color: transparent;
-}
-details[open] summary::-webkit-details-marker {
-    color: transparent;
-}
-
-/*
-	*normal styling
-*/
-summary{
-	cursor: pointer;
-}
-
-details[open]{
-	background-color: rgb(243,243,243);
-}
-
-details h4{
-	border-bottom: 4px solid black;
-}
-
-details div{
-	display: inline-block;
-	width: 25%;
-	margin: 2.45%;
-	background-color: rgb(200,200,200);
-    vertical-align: top;
-}
-
-
 /*
 	*following css gives styling to the logo's of all the parties at the home screen
 */
@@ -308,4 +242,8 @@ details div{
 .activeButton{
 	background-color: rgba(1,180,220,1) !important;
 	border-radius: 7.5px !important;
+}
+
+#endscreen{
+	display: none;
 }

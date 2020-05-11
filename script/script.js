@@ -105,15 +105,14 @@ function updateItems(){
 		var txt;
 		var r = confirm("Weet u zeker dat u naar de resultaten wilt gaan?");
 		if (r == true) {
-			alert("You pressed OK!");
-		} else {
-			alert("You pressed Cancel!"); 
-		}
-		document.getElementById("demo").innerHTML = txt;
+			document.getElementById('backbutton-div').style.display='none';
+			// document.getElementById('main-content-content').style.display='none';
+			document.getElementById('button-div').style.display='none';
+			document.getElementById('endscreen').style.display='block';
+		} else {}
 	}else{
 		updateText(); 
 		updateProgressBar(); 
-		// updateOpinions();
 		checkAnswer();
 	}
 }
@@ -129,22 +128,7 @@ function updateProgressBar(){
 	document.getElementById('progress').style.width = [count+1]/30*100+'%'; 
 }
 
-updateOpinions();
-function updateOpinions(){
-	//wipe all content first
-	var eeh = document.getElementById('eensExplanationHeader');
-	var geh = document.getElementById('geenExplanationHeader');
-	var oeh = document.getElementById('oneensExplenationHeader');
-	eeh.parentElement.innerHTML = '<h4 id="eensExplanationHeader">Eens</h4>';
-	geh.parentElement.innerHTML = '<h4 id="geenExplanationHeader">Geen van beide</h4>';
-	oeh.parentElement.innerHTML = '<h4 id="oneensExplenationHeader">Oneens</h4>';
-
-	//add new content
-	
-}
-
 function checkAnswer(){
-	console.log(count);
 	if(answers[count] != ""){
 		removeHighlights();
 		switch(answers[count]){
