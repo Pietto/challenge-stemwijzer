@@ -188,12 +188,42 @@ var explanations = ['"Er moet een bindend referendum komen, waarmee burgers door
 '"Nederland moet uit de Europese Unie (EU) stappen."'];
 
 var items = '';
+var titleCopy = [];
+
+// var titleCopy = titles.replace(/\s/g, '');
+for(i = 0; i < 30; i++)
+{
+    titleCopy[i] = titles[i].replace(' ', '');
+}
 
 for(i=0; i<30; i++){
-	items = items + '<li class="opinions__item"> <input type="checkbox"><label><span>'+titles[i]+'  </span></label><div class="tooltip"><span class="tooltip">?<span class="tooltiptext">'+explanations[i]+'</span></span></div></li>';
+	items = items + '<li class="opinions__item"> <input type="checkbox" id="'+titleCopy[i]+'" value="'+titleCopy[i]+'"><label><span>'+titles[i]+'  </span></label><div class="tooltip"><span class="tooltip">?<span class="tooltiptext">'+explanations[i]+'</span></span></div></li>';
 }
 
 document.getElementById('push-list-items').innerHTML = items;
+
+function submit(){
+	for(i=0; i<30; i++){
+		var checkBoxes = checkBoxes+['checkbox'+'1', 'checkbox'+'2'];
+	}
+	var checkbox1 = document.getElementById('Bindendreferendum');
+	if(checkbox1.checked == true){
+		console.log('checked');
+	}else{
+		console.log('unchecked');
+	}
+}
+
+
+function myFunction() {
+  var checkBox = document.getElementById("myCheck");
+  var text = document.getElementById("text");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+}
 
 
 /*<li class="opinions__item">

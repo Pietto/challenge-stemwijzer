@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Stemwijzer bitfchesss</title>
+	<title>Stemwijzer Tweede Kamer 2017</title>
 	<link rel="stylesheet" type="text/css" href="styling/styling.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
