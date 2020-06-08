@@ -204,7 +204,7 @@ document.getElementById('push-list-items').innerHTML = items;
 
 function submit(){
 	for(i=0; i<30; i++){
-		var checkBoxes = checkBoxes+['checkbox'+'1', 'checkbox'+'2'];
+		var checkBoxes = checkBoxes +['checkbox'+'1', 'checkbox'+'2'];
 	}
 	var checkbox1 = document.getElementById('Bindendreferendum');
 	if(checkbox1.checked == true){

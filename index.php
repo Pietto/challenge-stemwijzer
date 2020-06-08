@@ -11,7 +11,7 @@
 	<div id='main-content'>
 		<div id='main-content-content'>
 			<img src="img/stemwijzer-logo.png" alt='stemwijzer logo'>
-			<h2 id='stemwijzer-logo-text'>StemWijzer Tweede Kamer 2020</h2>
+			<h2 id='stemwijzer-logo-text'>StemWijzer Tweede Kamer 2017</h2>
 			<h1 id='stemwijzer-logo-header'>Test uw politieke voorkeur aan de hand van 30 stellingen</h1>
 			<div id='main-content-startdiv'>
 				<div id='main-content-startdiv-subdiv'>
@@ -20,7 +20,7 @@
 						<p>Bekijk de toegankelijke versie voor mensen met een visuele beperking</p>	
 					</span>
 					<span class="main-content-span" id='main-content-span-2'>
-						<img class='start-page-icons' id='start-page-icon-2' src="img/lock.svg" alt='icon'>
+						<img class='start-page-icons' id='start-page-icon-2' src="img/lock.png" alt='icon'>
 						<p>De StemWijzer maakt geen gebruik van cookies. Klik hier voor de volledige privacy statement</p>	
 					</span>
 				</div>
@@ -65,4 +65,18 @@
 	function stopInterval(){
 		clearInterval(interval);
 	}
+
+
+	var lock = document.getElementById("start-page-icon-2");
+	var interval;
+	lock.onmouseover = function(){
+		interval = setInterval(function(){
+			lock.src="img/lock_open.png";
+			setTimeout(function(){
+				lock.src="img/lock.png";
+			},250);
+		},500);
+		lock.src="img/lock.png";
+	}
+	lock.onmouseout = stopInterval
 </script>
