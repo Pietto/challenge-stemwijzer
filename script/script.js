@@ -221,9 +221,21 @@ function Results(){
 }
 
 function calculateResults(){
+	//23 parties
 	console.log(answers);
 	console.log(subjects[0].parties[0].position);
 	console.log(subjects[0].parties);
+	var partyResults = [{name: 'asdf', match: true},{name: 'sfad', match: false}];
+	console.log(partyResults);
+	for(i=0; i<23; i++){
+		if(subjects[0].parties[i].position == answers[i]){
+			console.log('same');
+			subjects[0].parties[i]	
+		}else{
+			console.log('not same');
+		}/*
+		console.log(subjects[0].parties[i].position);*/
+	}
 
 
 }
