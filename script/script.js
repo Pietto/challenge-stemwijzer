@@ -67,21 +67,21 @@ setTimeout(function(){
 
 //function when the statement has been agreed upon
 function eens(){ 
-	answers[count]='eens';
+	answers[count]='pro';
 	count++ 
 	updateItems();
 } 
 
 //function when no choice has been made
 function geenKeuze(){ 
-	answers[count]='geenKeuze';
+	answers[count]='none';
 	count++ 
 	updateItems();
 }
 
 //function when the statement has been rejected
 function oneens(){
-	answers[count]='oneens';
+	answers[count]='contra';
 	count++
 	updateItems();
 }
@@ -203,19 +203,32 @@ for(i=0; i<30; i++){
 document.getElementById('push-list-items').innerHTML = items;
 
 function submit(){
+	var results = [];
 	for(i=0; i<30; i++){
-		var checkBoxes = checkBoxes +['checkbox'+'1', 'checkbox'+'2'];
+		results[i]=document.getElementById(titleCopy[i]).checked;
 	}
-	var checkbox1 = document.getElementById('Bindendreferendum');
-	if(checkbox1.checked == true){
-		console.log('checked');
-	}else{
-		console.log('unchecked');
-	}
+	Results();
 }
 
+function Results(){
+	calculateResults();
 
-function myFunction() {
+	var h1_2 = document.getElementById('main-content-content-h1-2');
+	var h2_2 = document.getElementById('main-content-content-h2-2');
+	h1_2.innerHTML = 'Uw mening komt het best overeen met:';
+	h2_2.innerHTML = 'Partijwinner hierzo';
+	document.getElementById('endscreen-subjects').innerHTML = '';
+}
+
+function calculateResults(){
+	console.log(answers);
+	console.log(subjects[0].parties[0].position);
+	console.log(subjects[0].parties);
+
+
+}
+
+/*function myFunction() {
   var checkBox = document.getElementById("myCheck");
   var text = document.getElementById("text");
   if (checkBox.checked == true){
@@ -223,11 +236,11 @@ function myFunction() {
   } else {
      text.style.display = "none";
   }
-}
+}*/
 
 
 /*<li class="opinions__item">
 	<input type="checkbox" id="checkbox">
 	<label><span>Maatschappelijke dienstplicht</span></label>
 	<div class='tooltip'><span class='tooltip'>?<span class='tooltiptext'>"Er moet een maatschappelijke dienstplicht voor jongeren komen. Zij kunnen dan dienen in het leger, bij de politie of in de zorg."</span></span></div>
-</li>*/
+</li>*/		
