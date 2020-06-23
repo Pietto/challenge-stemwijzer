@@ -210,34 +210,39 @@ function submit(){
 	Results();
 }
 
+var h1_2 = document.getElementById('main-content-content-h1-2');
+var h2_2 = document.getElementById('main-content-content-h2-2');
+
 function Results(){
 	calculateResults();
-
-	var h1_2 = document.getElementById('main-content-content-h1-2');
-	var h2_2 = document.getElementById('main-content-content-h2-2');
 	h1_2.innerHTML = 'Uw mening komt het best overeen met:';
-	h2_2.innerHTML = 'Partijwinner hierzo';
+	h2_2.innerHTML = '';
 	document.getElementById('endscreen-subjects').innerHTML = '';
 }
+var partyResults = [];
 
 function calculateResults(){
-	//23 parties
-	console.log(answers);
-	console.log(subjects[0].parties[0].position);
-	console.log(subjects[0].parties);
-	var partyResults = [{name: 'asdf', match: true},{name: 'sfad', match: false}];
-	console.log(partyResults);
-	for(i=0; i<23; i++){
-		if(subjects[0].parties[i].position == answers[i]){
-			console.log('same');
-			subjects[0].parties[i]	
-		}else{
-			console.log('not same');
-		}/*
-		console.log(subjects[0].parties[i].position);*/
+	for(i=0; i<parties.length; i++){
+		partyResults.push({name: parties[i].name, match: 0})
 	}
+	for(z=0; z<subjects.length; z++){
+		for(i=0; i<subjects[z].parties.length; i++){
+			if(subjects[z].parties[i].position == answers[z]){
+				for(y=0; y<partyResults.length; y++){
+					if(subjects[z].parties[i].name == partyResults[y].name){
+						partyResults[i].match = partyResults[i].match+1;
+					}
+				}
+			}
+		}
+	}
+	setTimeout(function(){
+		displayResults();
+	},1);
+}
 
-
+function displayResults(){
+	h2_2.innerHTML = ;
 }
 
 /*function myFunction() {
