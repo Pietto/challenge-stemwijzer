@@ -238,11 +238,11 @@ function calculateResults(){
 	}
 	setTimeout(function(){
 		displayResults();
-	},1);
+	},1);	
 }
 
 function displayResults(){
-	h2_2.innerHTML = ;
+	h2_2.innerHTML = 'aaa';
 }
 
 /*function myFunction() {
@@ -260,4 +260,24 @@ function displayResults(){
 	<input type="checkbox" id="checkbox">
 	<label><span>Maatschappelijke dienstplicht</span></label>
 	<div class='tooltip'><span class='tooltip'>?<span class='tooltiptext'>"Er moet een maatschappelijke dienstplicht voor jongeren komen. Zij kunnen dan dienen in het leger, bij de politie of in de zorg."</span></span></div>
-</li>*/		
+</li>*/
+
+
+
+var GivenTestAnswers = ['pro', 'contra', 'none', 'pro', 'contra', 'none'];
+var RecievedTestParties = {VVD: ['pro', 'pro', 'pro', 'pro', 'pro', 'pro'], PVV: ['contra', 'contra', 'contra', 'contra', 'contra', 'contra'], SGP: ['none', 'none', 'none', 'none', 'none', 'none']};
+var score = {VVD: [0], PVV: [0], SGP: [0]};
+
+var L = GivenTestAnswers.length;
+var partyCount = Object.keys(RecievedTestParties).length;
+
+for(z=0; z<partyCount; z++){
+	console.log(z+':');
+	for(i=0; i<L; i++){
+		if(GivenTestAnswers[i] == RecievedTestParties[Object.keys(RecievedTestParties)[z]][i]){
+			console.log('yes');
+		}else{
+			console.log('no');
+		}
+	}
+}
