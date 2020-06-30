@@ -32,22 +32,7 @@ function moveBack(x) {
 }
 
 //hold a reference
-let count = 0;
-
-// var score = [{}] 
- 
-// console.log('length: ' + subjects[0].parties.length); 
- 
-// for(i=0;i<subjects.length;i++){ 
-// 	score.push({party: subjects[0].parties[i].name, score: 0}); 
-// } 
-// console.log(score); 
- 
-/*var score = [{party: 'vvd', points: 0},{party: 'pvda', points: 0}]; 
-score.push({party: '50plus', score: 0});*/ 
- 
-/*var titleElement = document.getElementById('main-content-content-h1');*/ 
- 
+let count = 0; 
 
  //giving the title+subtitle the correct content
 var titleContent = '1. ' + subjects[0].title; 
@@ -245,39 +230,118 @@ function displayResults(){
 	h2_2.innerHTML = 'aaa';
 }
 
-/*function myFunction() {
-  var checkBox = document.getElementById("myCheck");
-  var text = document.getElementById("text");
-  if (checkBox.checked == true){
-    text.style.display = "block";
-  } else {
-     text.style.display = "none";
-  }
-}*/
+console.log(subjects[0].parties.DENK);
 
 
-/*<li class="opinions__item">
-	<input type="checkbox" id="checkbox">
-	<label><span>Maatschappelijke dienstplicht</span></label>
-	<div class='tooltip'><span class='tooltip'>?<span class='tooltiptext'>"Er moet een maatschappelijke dienstplicht voor jongeren komen. Zij kunnen dan dienen in het leger, bij de politie of in de zorg."</span></span></div>
-</li>*/
+var partyAnswers = {PVV: [], SP: [], D66: [], GroenLinks: [], Partij_voor_de_Dieren: [], _50Plus: [], VNL: [], Nieuwe_Wegen: [], Forum_voor_Democratie: [], De_Burger_Beweging: [], Vrijzinnige_Partij: [], Piratenpartij: [], Libertarische_Partij: [], Lokaal_in_de_Kamer: [], Niet_Stemmers: [], VVD: [], PvdA: [], CDA: [], ChristenUnie: [], SGP: [], OndernemersPartij: [], DENK: [], Artikel_1: []}
 
+var parties = ['PVV', 'SP', 'D66', 'GroenLinks', 'Partij_voor_de_Dieren', '_50Plus', 'VNL', 'Nieuwe_Wegen',
+				'Forum_voor_Democratie', 'De_Burger_Beweging', 'Vrijzinnige_Partij', 'Piratenpartij',
+				'Libertarische_Partij', 'Lokaal_in_de_Kamer', 'Niet_Stemmers', 'VVD', 'PvdA', 'CDA',
+				'ChristenUnie', 'SGP', 'OndernemersPartij', 'DENK', 'Artikel_1'];
 
-
-var GivenTestAnswers = ['pro', 'contra', 'none', 'pro', 'contra', 'none'];
-var RecievedTestParties = {VVD: ['pro', 'pro', 'pro', 'pro', 'pro', 'pro'], PVV: ['contra', 'contra', 'contra', 'contra', 'contra', 'contra'], SGP: ['none', 'none', 'none', 'none', 'none', 'none']};
-var score = {VVD: [0], PVV: [0], SGP: [0]};
-
-var L = GivenTestAnswers.length;
-var partyCount = Object.keys(RecievedTestParties).length;
-
-for(z=0; z<partyCount; z++){
-	console.log(z+':');
-	for(i=0; i<L; i++){
-		if(GivenTestAnswers[i] == RecievedTestParties[Object.keys(RecievedTestParties)[z]][i]){
-			console.log('yes');
-		}else{
-			console.log('no');
+// partyAnswers.PVV = ['pro', 'pro'];
+for(y=0; y<parties.length; y++){
+	for(i=0; i<subjects.length; i++){
+		for(x=0; x<23; x++){
+			if(subjects[i].parties[x].name == parties[y]){
+				switch(parties[y]) {
+					case 'PVV':
+					  	partyAnswers.PVV.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'SP':
+					  	partyAnswers.SP.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'D66':
+					  	partyAnswers.D66.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'GroenLinks':
+					  	partyAnswers.GroenLinks.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'Partij_voor_de_Dieren':
+					  	partyAnswers.Partij_voor_de_Dieren.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case '_50Plus':
+					  	partyAnswers._50Plus.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'VNL':
+					  	partyAnswers.VNL.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'Nieuwe_Wegen':
+					  	partyAnswers.Nieuwe_Wegen.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'Forum_voor_Democratie':
+					  	partyAnswers.Forum_voor_Democratie.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'De_Burger_Beweging':
+					  	partyAnswers.De_Burger_Beweging.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'Vrijzinnige_Partij':
+					  	partyAnswers.Vrijzinnige_Partij.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'Piratenpartij':
+					  	partyAnswers.Piratenpartij.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'Libertarische_Partij':
+					  	partyAnswers.Libertarische_Partij.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'Lokaal_in_de_Kamer':
+					  	partyAnswers.Lokaal_in_de_Kamer.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'Niet_Stemmers':
+					  	partyAnswers.Niet_Stemmers.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'VVD':
+					  	partyAnswers.VVD.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'PvdA':
+					  	partyAnswers.PvdA.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'CDA':
+					  	partyAnswers.CDA.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'ChristenUnie':
+					  	partyAnswers.ChristenUnie.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'SGP':
+					  	partyAnswers.SGP.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'OndernemersPartij':
+					  	partyAnswers.OndernemersPartij.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'DENK':
+					  	partyAnswers.DENK.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					case 'Artikel_1':
+					  	partyAnswers.Artikel_1.push(subjects[i].parties[x].position);
+					  	console.log(parties[y]);
+					  	break;
+					default:
+				}
+			}else{}
 		}
 	}
 }
+console.log(partyAnswers);
