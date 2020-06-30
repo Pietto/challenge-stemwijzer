@@ -230,9 +230,6 @@ function displayResults(){
 	h2_2.innerHTML = 'aaa';
 }
 
-console.log(subjects[0].parties.DENK);
-
-
 var partyAnswers = {PVV: [], SP: [], D66: [], GroenLinks: [], Partij_voor_de_Dieren: [], _50Plus: [], VNL: [], Nieuwe_Wegen: [], Forum_voor_Democratie: [], De_Burger_Beweging: [], Vrijzinnige_Partij: [], Piratenpartij: [], Libertarische_Partij: [], Lokaal_in_de_Kamer: [], Niet_Stemmers: [], VVD: [], PvdA: [], CDA: [], ChristenUnie: [], SGP: [], OndernemersPartij: [], DENK: [], Artikel_1: []}
 
 var parties = ['PVV', 'SP', 'D66', 'GroenLinks', 'Partij_voor_de_Dieren', '_50Plus', 'VNL', 'Nieuwe_Wegen',
@@ -240,7 +237,22 @@ var parties = ['PVV', 'SP', 'D66', 'GroenLinks', 'Partij_voor_de_Dieren', '_50Pl
 				'Libertarische_Partij', 'Lokaal_in_de_Kamer', 'Niet_Stemmers', 'VVD', 'PvdA', 'CDA',
 				'ChristenUnie', 'SGP', 'OndernemersPartij', 'DENK', 'Artikel_1'];
 
-// partyAnswers.PVV = ['pro', 'pro'];
+var wrongPartyNames = ['Artikel 1','De Burger Beweging', 'Forum voor Democratie', 'Libertarische Partij', 'Lokaal in de Kamer',
+'Niet Stemmers', 'Nieuwe Wegen', 'Partij voor de Dieren', 'Vrijzinnige Partij', '50Plus'];
+var correctPartyNames = ['Artikel_1','De_Burger_Beweging', 'Forum_voor_Democratie', 'Libertarische_Partij', 'Lokaal_in_de_Kamer',
+'Niet_Stemmers', 'Nieuwe_Wegen', 'Partij_voor_de_Dieren', 'Vrijzinnige_Partij', '_50Plus'];
+
+for(y=0; y<wrongPartyNames.length; y++){
+	for(x=0; x<subjects.length; x++){
+		for(i=0; i<23; i++){
+			if(subjects[x].parties[i].name == wrongPartyNames[y]){
+				subjects[x].parties[i].name = correctPartyNames[y];
+			}
+		}
+	}
+}
+
+
 for(y=0; y<parties.length; y++){
 	for(i=0; i<subjects.length; i++){
 		for(x=0; x<23; x++){
@@ -344,4 +356,5 @@ for(y=0; y<parties.length; y++){
 		}
 	}
 }
+
 console.log(partyAnswers);
