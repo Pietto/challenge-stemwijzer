@@ -1,11 +1,9 @@
-//backbutton mouseover event 
-
-var answers = [];
+var answers = [];										//array to push given answers in. format: ["pro", "none", "contra", "skip"]
 for(i=0; i<subjects.length; i++){
 	answers.push('');
 }
- 
-function backButton(){ 
+
+function backButton(){ 									//functionality of the button to go back
 	if(count == 0){ 
 		window.open('index.php','_self'); 
 	}else{ 
@@ -13,16 +11,23 @@ function backButton(){
 	} 
 }
 
-var button1 = document.getElementById('yes');
+var button1 = document.getElementById('yes');			//defining buttons in variable
 var button2 = document.getElementById('none');
 var button3 = document.getElementById('no');
 var button4 = document.getElementById('skip');
 
 
-//developer tool to check the subjects object
+button1.className = "buttons";
+button2.className = "buttons";
+button3.className = "buttons";
+button4.className = "buttons";
+var buttons = document.getElementsByClassName('buttons');
+var buttonDiv = document.getElementById('button-div');
+
+//developer tool to check the subjects object, should be deleted in the final product
 console.log(subjects); 
 
-//moves the button (and back) when hovered
+//animation of the button that allows you to go to the last question
 function move(x) { 
 	x.style.position = 'relative'; 
 	x.style.left = '-1vw'; 
@@ -31,16 +36,17 @@ function moveBack(x) {
 	x.style.left = '0px'; 
 }
 
-//hold a reference
-let count = 0; 
+let count = 0; 											//hold a reference
 
- //giving the title+subtitle the correct content
-var titleContent = '1. ' + subjects[0].title; 
-var statementContent = subjects[0].statement; 
- 
+var titleContent = '1. ' + subjects[0].title;			//giving the title and subtitle the correct content
+var statementContent = subjects[0].statement;
+
+var PartyMatches = [];									//reference of how many points eacht party gets
+
+
 var h1 = document.getElementById('main-content-content-h1'); 
 var h2 = document.getElementById('main-content-content-h2'); 
- 
+
 h1.innerHTML = titleContent; 
 h2.innerHTML = statementContent; 
 
@@ -48,19 +54,19 @@ h2.innerHTML = statementContent;
 //(this gives a simple smooth animation when the form has been started)
 setTimeout(function(){ 
 	document.getElementById('progress').style.width = 1/30*100+'%'; 
-},500); 
+},500);
 
 //function when the statement has been agreed upon
 function eens(){ 
 	answers[count]='pro';
-	count++ 
+	count++
 	updateItems();
-} 
+}
 
 //function when no choice has been made
 function geenKeuze(){ 
 	answers[count]='none';
-	count++ 
+	count++
 	updateItems();
 }
 
@@ -97,9 +103,10 @@ function updateItems(){
 			document.getElementById('endscreen').style.display='block';
 		} else {}
 	}else{
-		updateText(); 
-		updateProgressBar(); 
-		checkAnswer();
+		removeHighlights();												//remove all highlights on buttons first
+		updateText(); 													//display new text
+		updateProgressBar(); 											//update progressbar
+		checkAnswer();													//check whether answer has been given before
 	}
 }
 
@@ -114,26 +121,29 @@ function updateProgressBar(){
 	document.getElementById('progress').style.width = [count+1]/30*100+'%'; 
 }
 
+//if statement has been answered before, this will project the given answer
 function checkAnswer(){
 	if(answers[count] != ""){
 		removeHighlights();
 		switch(answers[count]){
-			case 'eens':
-			button1.classList.add("activeButton");
+			case 'pro':
+				button1.classList.add("activeButton");
 			break;
-			case 'geenKeuze':
-			button2.classList.add("activeButton");
+			case 'none':
+				button2.classList.add("activeButton");
 			break;
-			case 'oneens':
-			button3.classList.add("activeButton");
+			case 'contra':
+				button3.classList.add("activeButton");
 			break;
 			case 'skip':
-			button4.classList.add("activeButton");
+				button4.classList.add("activeButton");
+			default:
+				console.log('error on line ->');				//dev tool
 		}
 	}
 }
 
-function removeHighlights(){
+function removeHighlights(){									//removes highlights from buttons
 	button1.classList.remove('activeButton');
 	button2.classList.remove('activeButton');
 	button3.classList.remove('activeButton');
@@ -174,10 +184,7 @@ var explanations = ['"Er moet een bindend referendum komen, waarmee burgers door
 
 var items = '';
 var titleCopy = [];
-
-// var titleCopy = titles.replace(/\s/g, '');
-for(i = 0; i < 30; i++)
-{
+for(i = 0; i < 30; i++){
     titleCopy[i] = titles[i].replace(' ', '');
 }
 
@@ -187,6 +194,7 @@ for(i=0; i<30; i++){
 
 document.getElementById('push-list-items').innerHTML = items;
 
+//function when submitting the questions
 function submit(){
 	var results = [];
 	for(i=0; i<30; i++){
@@ -198,163 +206,83 @@ function submit(){
 var h1_2 = document.getElementById('main-content-content-h1-2');
 var h2_2 = document.getElementById('main-content-content-h2-2');
 
+//displays correct text, then proceeds to go to the calculate function
 function Results(){
 	calculateResults();
 	h1_2.innerHTML = 'Uw mening komt het best overeen met:';
 	h2_2.innerHTML = '';
 	document.getElementById('endscreen-subjects').innerHTML = '';
 }
-var partyResults = [];
 
+var realPartyNames = [];
+for(i=0; i<subjects[0].parties.length; i++){
+	realPartyNames.push(subjects[0].parties[i].name);
+}
+
+//calculate results
 function calculateResults(){
-	for(i=0; i<parties.length; i++){
-		partyResults.push({name: parties[i].name, match: 0})
-	}
-	for(z=0; z<subjects.length; z++){
-		for(i=0; i<subjects[z].parties.length; i++){
-			if(subjects[z].parties[i].position == answers[z]){
-				for(y=0; y<partyResults.length; y++){
-					if(subjects[z].parties[i].name == partyResults[y].name){
-						partyResults[i].match = partyResults[i].match+1;
+	//part 1: comparing the given results with the opinions of the political parties, and giving them point accordingly
+		for(p=0; p<parties.length; p++){								//0:VVD
+			PartyMatches[parties[p].name] = 0;
+			for(s=0; s<subjects.length; s++){							//0:bindend referendum
+				for(m=0; m<subjects[s].parties.length; m++){
+					if(subjects[s].parties[m].name == parties[p].name){
+						if(subjects[s].parties[m].position == answers[s]){
+						PartyMatches[parties[p].name]++;
+						}else{
+							//do nothing
+						}
 					}
 				}
 			}
 		}
-	}
-	setTimeout(function(){
-		displayResults();
-	},1);	
+		console.table(PartyMatches);
+
+		//part 2: extra points for opinions that are, according to the player, more important
+
+		//part 3: returning a percentage of common answers/total amount of questions
+
+		
+
+		//part 4: displaying results
+	setTimeout(function(){displayResults();},1);
 }
 
 function displayResults(){
-	h2_2.innerHTML = 'aaa';
-}
+	h2_2.innerHTML = 'ERROR';
 
-var partyAnswers = {PVV: [], SP: [], D66: [], GroenLinks: [], Partij_voor_de_Dieren: [], _50Plus: [], VNL: [], Nieuwe_Wegen: [], Forum_voor_Democratie: [], De_Burger_Beweging: [], Vrijzinnige_Partij: [], Piratenpartij: [], Libertarische_Partij: [], Lokaal_in_de_Kamer: [], Niet_Stemmers: [], VVD: [], PvdA: [], CDA: [], ChristenUnie: [], SGP: [], OndernemersPartij: [], DENK: [], Artikel_1: []}
+	//	c = count, pn = party number, ps = party score
 
-var parties = ['PVV', 'SP', 'D66', 'GroenLinks', 'Partij_voor_de_Dieren', '_50Plus', 'VNL', 'Nieuwe_Wegen',
-				'Forum_voor_Democratie', 'De_Burger_Beweging', 'Vrijzinnige_Partij', 'Piratenpartij',
-				'Libertarische_Partij', 'Lokaal_in_de_Kamer', 'Niet_Stemmers', 'VVD', 'PvdA', 'CDA',
-				'ChristenUnie', 'SGP', 'OndernemersPartij', 'DENK', 'Artikel_1'];
+	var PartyScoreInOrder = [];
 
-var wrongPartyNames = ['Artikel 1','De Burger Beweging', 'Forum voor Democratie', 'Libertarische Partij', 'Lokaal in de Kamer',
-'Niet Stemmers', 'Nieuwe Wegen', 'Partij voor de Dieren', 'Vrijzinnige Partij', '50Plus'];
-var correctPartyNames = ['Artikel_1','De_Burger_Beweging', 'Forum_voor_Democratie', 'Libertarische_Partij', 'Lokaal_in_de_Kamer',
-'Niet_Stemmers', 'Nieuwe_Wegen', 'Partij_voor_de_Dieren', 'Vrijzinnige_Partij', '_50Plus'];
-
-for(y=0; y<wrongPartyNames.length; y++){
-	for(x=0; x<subjects.length; x++){
-		for(i=0; i<23; i++){
-			if(subjects[x].parties[i].name == wrongPartyNames[y]){
-				subjects[x].parties[i].name = correctPartyNames[y];
+	for(c=100; c>0; c--){
+		for(pn=0; pn<parties.length; pn++){
+			if(PartyMatches[parties[pn].name] == c){
+				PartyScoreInOrder.push(parties[pn].name);		//+'['+pn+']'
 			}
 		}
 	}
-}
+	console.log(PartyScoreInOrder);
 
+	h2_2.innerHTML = PartyScoreInOrder[0];
 
-for(y=0; y<parties.length; y++){
-	for(i=0; i<subjects.length; i++){
-		for(x=0; x<23; x++){
-			if(subjects[i].parties[x].name == parties[y]){
-				switch(parties[y]) {
-					case 'PVV':
-					  	partyAnswers.PVV.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'SP':
-					  	partyAnswers.SP.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'D66':
-					  	partyAnswers.D66.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'GroenLinks':
-					  	partyAnswers.GroenLinks.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'Partij_voor_de_Dieren':
-					  	partyAnswers.Partij_voor_de_Dieren.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case '_50Plus':
-					  	partyAnswers._50Plus.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'VNL':
-					  	partyAnswers.VNL.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'Nieuwe_Wegen':
-					  	partyAnswers.Nieuwe_Wegen.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'Forum_voor_Democratie':
-					  	partyAnswers.Forum_voor_Democratie.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'De_Burger_Beweging':
-					  	partyAnswers.De_Burger_Beweging.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'Vrijzinnige_Partij':
-					  	partyAnswers.Vrijzinnige_Partij.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'Piratenpartij':
-					  	partyAnswers.Piratenpartij.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'Libertarische_Partij':
-					  	partyAnswers.Libertarische_Partij.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'Lokaal_in_de_Kamer':
-					  	partyAnswers.Lokaal_in_de_Kamer.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'Niet_Stemmers':
-					  	partyAnswers.Niet_Stemmers.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'VVD':
-					  	partyAnswers.VVD.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'PvdA':
-					  	partyAnswers.PvdA.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'CDA':
-					  	partyAnswers.CDA.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'ChristenUnie':
-					  	partyAnswers.ChristenUnie.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'SGP':
-					  	partyAnswers.SGP.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'OndernemersPartij':
-					  	partyAnswers.OndernemersPartij.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'DENK':
-					  	partyAnswers.DENK.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					case 'Artikel_1':
-					  	partyAnswers.Artikel_1.push(subjects[i].parties[x].position);
-					  	console.log(parties[y]);
-					  	break;
-					default:
-				}
-			}else{}
-		}
+	//display div and hide buttons
+	buttonDiv.style.display='block'; 
+	button1.style.display='none';
+	button2.style.display='none';
+	button3.style.display='none';
+	button4.style.display='none';
+
+	buttonDiv.innerHTML = '<h1>Overeenkomsten: </h1>';
+	var partyPercentages = [];
+	for(i=0; i<PartyScoreInOrder.length; i++){
+		partyPercentages.push(100/30*PartyMatches[PartyScoreInOrder[i]]);
+		partyPercentages[i] = Math.trunc(partyPercentages[i]);
 	}
-}
 
-console.log(partyAnswers);
+	for(i=0; i<PartyScoreInOrder.length; i++){
+		buttonDiv.innerHTML = buttonDiv.innerHTML + '<h3>'+PartyScoreInOrder[i]+', '+partyPercentages[i]+'%</h3>'+
+		'<div class="PBPS"><div class="PBPSI" id="PBPSI'+i+'" style="width:1%";></div></div>';
+	}
+	setTimeout(function(){for(i=0; i<PartyScoreInOrder.length; i++){document.getElementById('PBPSI'+i).style.width=partyPercentages[i]+'%';}},500);
+}
