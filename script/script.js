@@ -277,12 +277,13 @@ function displayResults(){
 	var partyPercentages = [];
 	for(i=0; i<PartyScoreInOrder.length; i++){
 		partyPercentages.push(100/30*PartyMatches[PartyScoreInOrder[i]]);
-		partyPercentages[i] = Math.trunc(partyPercentages[i]);
+		partyPercentages[i] = partyPercentages[i];
+		/*Math.trunc*/
 	}
 
 	for(i=0; i<PartyScoreInOrder.length; i++){
 		buttonDiv.innerHTML = buttonDiv.innerHTML + '<h3>'+PartyScoreInOrder[i]+', '+partyPercentages[i]+'%</h3>'+
 		'<div class="PBPS"><div class="PBPSI" id="PBPSI'+i+'" style="width:1%";></div></div>';
 	}
-	setTimeout(function(){for(i=0; i<PartyScoreInOrder.length; i++){document.getElementById('PBPSI'+i).style.width=partyPercentages[i]+'%';}},500);
-}
+	// setTimeout(function(){for(i=0; i<PartyScoreInOrder.length; i++){document.getElementById('PBPSI'+i).+'%';}},500);
+}				/*must use partyPercentages, developer tool*/
