@@ -188,6 +188,8 @@ for(i = 0; i < 30; i++){
     titleCopy[i] = titles[i].replace(' ', '');
 }
 
+
+//making the forum to add weight for specific subjects
 for(i=0; i<30; i++){
 	items = items + '<li class="opinions__item"> <input type="checkbox" id="'+titleCopy[i]+'" value="'+titleCopy[i]+'"><label><span>'+titles[i]+'  </span></label><div class="tooltip"><span class="tooltip">?<span class="tooltiptext">'+explanations[i]+'</span></span></div></li>';
 }
@@ -222,9 +224,9 @@ for(i=0; i<subjects[0].parties.length; i++){
 //calculate results
 function calculateResults(){
 	//part 1: comparing the given results with the opinions of the political parties, and giving them point accordingly
-		for(p=0; p<parties.length; p++){								//0:VVD
+		for(p=0; p<parties.length; p++){								//0:VVD						dev tool
 			PartyMatches[parties[p].name] = 0;
-			for(s=0; s<subjects.length; s++){							//0:bindend referendum
+			for(s=0; s<subjects.length; s++){							//0:bindend referendum		dev tool
 				for(m=0; m<subjects[s].parties.length; m++){
 					if(subjects[s].parties[m].name == parties[p].name){
 						if(subjects[s].parties[m].position == answers[s]){
@@ -287,3 +289,14 @@ function displayResults(){
 	}
 	setTimeout(function(){for(i=0; i<PartyScoreInOrder.length; i++){document.getElementById('PBPSI'+i).style.width=partyPercentages[i]+'%';}},500);
 }				/*must use partyPercentages, developer tool*/
+
+
+
+
+
+
+
+
+
+
+//if(var.checked == true){}

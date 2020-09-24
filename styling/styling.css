@@ -257,7 +257,6 @@ button a{
 .tooltip {
   position: relative;
   display: inline-block;
-  border: 1px dotted black;
 }
 
 .tooltip .tooltiptext {
@@ -291,7 +290,7 @@ button a{
 	margin-top: -1vh;
 	width: 50vw;
 	height: 10px;
-	background-color: rgb(200,200,200);
+	background-color: rgba(235,235,235,1);
 	border-radius: 100vw;
 }
 
