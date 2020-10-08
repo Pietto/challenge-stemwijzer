@@ -43,7 +43,6 @@ var statementContent = subjects[0].statement;
 
 var PartyMatches = [];									//reference of how many points eacht party gets
 
-
 var h1 = document.getElementById('main-content-content-h1'); 
 var h2 = document.getElementById('main-content-content-h2'); 
 
@@ -191,7 +190,7 @@ for(i = 0; i < 30; i++){
 
 //making the forum to add weight for specific subjects
 for(i=0; i<30; i++){
-	items = items + '<li class="opinions__item"> <input type="checkbox" id="'+titleCopy[i]+'" value="'+titleCopy[i]+'"><label><span>'+titles[i]+'  </span></label><div class="tooltip"><span class="tooltip">?<span class="tooltiptext">'+explanations[i]+'</span></span></div></li>';
+	items = items + '<li class="opinions__item"> <input type="checkbox" id="checkbox'+ i +'" value="'+titleCopy[i]+'" onclick="weight('+i+')"><label><span>'+titles[i]+'  </span></label><div class="tooltip"><span class="tooltip">?<span class="tooltiptext">'+explanations[i]+'</span></span></div></li>';
 }
 
 document.getElementById('push-list-items').innerHTML = items;
@@ -243,6 +242,7 @@ function calculateResults(){
 		//part 2: extra points for opinions that are, according to the player, more important
 
 		//part 3: returning a percentage of common answers/total amount of questions
+		
 
 		
 
@@ -290,13 +290,15 @@ function displayResults(){
 	setTimeout(function(){for(i=0; i<PartyScoreInOrder.length; i++){document.getElementById('PBPSI'+i).style.width=partyPercentages[i]+'%';}},500);
 }				/*must use partyPercentages, developer tool*/
 
+var fat = [];
+for(i=0; i<23; i++){
+	fat.push(1);
+}
 
-
-
-
-
-
-
-
-
-//if(var.checked == true){}
+function weight(numbah){
+	if(fat[numbah] == 1){
+		fat[numbah] = 2;
+	}else if(fat[numbah] == 2){
+		fat[numbah] = 1;
+	}
+}
