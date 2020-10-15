@@ -42,6 +42,9 @@ var titleContent = '1. ' + subjects[0].title;			//giving the title and subtitle 
 var statementContent = subjects[0].statement;
 
 var PartyMatches = [];									//reference of how many points eacht party gets
+for(p=0; p<parties.length; p++){
+	PartyMatches[parties[p].name] = 0;
+}
 
 var h1 = document.getElementById('main-content-content-h1'); 
 var h2 = document.getElementById('main-content-content-h2'); 
@@ -190,7 +193,7 @@ for(i = 0; i < 30; i++){
 
 //making the forum to add weight for specific subjects
 for(i=0; i<30; i++){
-	items = items + '<li class="opinions__item"> <input type="checkbox" id="checkbox'+ i +'" value="'+titleCopy[i]+'" onclick="weight('+i+')"><label><span>'+titles[i]+'  </span></label><div class="tooltip"><span class="tooltip">?<span class="tooltiptext">'+explanations[i]+'</span></span></div></li>';
+	items = items + '<li class="opinions__item"> <input type="checkbox" id="checkbox'+ i +'" value="'+ titleCopy[i] +'" onclick="weight('+ i +')"><label></label><div class="tooltip"><span class="tooltip">'+ titles[i] +'<span class="tooltiptext">'+ explanations[i] +'</span></span></div></li>';
 }
 
 document.getElementById('push-list-items').innerHTML = items;
@@ -198,9 +201,6 @@ document.getElementById('push-list-items').innerHTML = items;
 //function when submitting the questions
 function submit(){
 	var results = [];
-	for(i=0; i<30; i++){
-		results[i]=document.getElementById(titleCopy[i]).checked;
-	}
 	Results();
 }
 
@@ -223,15 +223,12 @@ for(i=0; i<subjects[0].parties.length; i++){
 //calculate results
 function calculateResults(){
 	//part 1: comparing the given results with the opinions of the political parties, and giving them point accordingly
-		for(p=0; p<parties.length; p++){								//0:VVD						dev tool
-			PartyMatches[parties[p].name] = 0;
-			for(s=0; s<subjects.length; s++){							//0:bindend referendum		dev tool
+		for(p=0; p<parties.length; p++){								//0:VVD
+			for(s=0; s<subjects.length; s++){							//0:bindend referendum
 				for(m=0; m<subjects[s].parties.length; m++){
 					if(subjects[s].parties[m].name == parties[p].name){
 						if(subjects[s].parties[m].position == answers[s]){
-						PartyMatches[parties[p].name]++;
-						}else{
-							//do nothing
+							PartyMatches[parties[p].name]++;
 						}
 					}
 				}
@@ -242,9 +239,9 @@ function calculateResults(){
 		//part 2: extra points for opinions that are, according to the player, more important
 
 		//part 3: returning a percentage of common answers/total amount of questions
-		
 
-		
+
+
 
 		//part 4: displaying results
 	setTimeout(function(){displayResults();},1);
@@ -257,7 +254,7 @@ function displayResults(){
 
 	var PartyScoreInOrder = [];
 
-	for(c=100; c>0; c--){
+	for(c=100; c>0; c--){										//gives parties in order
 		for(pn=0; pn<parties.length; pn++){
 			if(PartyMatches[parties[pn].name] == c){
 				PartyScoreInOrder.push(parties[pn].name);		//+'['+pn+']'
@@ -290,15 +287,21 @@ function displayResults(){
 	setTimeout(function(){for(i=0; i<PartyScoreInOrder.length; i++){document.getElementById('PBPSI'+i).style.width=partyPercentages[i]+'%';}},500);
 }				/*must use partyPercentages, developer tool*/
 
-var fat = [];
-for(i=0; i<23; i++){
-	fat.push(1);
-}
 
-function weight(numbah){
-	if(fat[numbah] == 1){
-		fat[numbah] = 2;
-	}else if(fat[numbah] == 2){
-		fat[numbah] = 1;
+function weight(number){
+	for(i=0; i<subjects[number].parties.length; i++){
+		if(subjects[number].parties[i].position == answers[number]){
+			PartyMatches[subjects[number].parties[i].name] = PartyMatches[subjects[number].parties[i].name] + 1;
+		}
 	}
 }
+
+
+/*   dev notes:
+
+
+-remove devtools
+-Libertarische Partij shows up twice in the results
+
+
+*/
