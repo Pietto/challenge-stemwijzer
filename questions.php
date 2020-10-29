@@ -25,7 +25,7 @@
 						<ul id='push-list-items'>
 						
 						</ul>
-						<button onclick='submit()'>submit</button>
+						<button id='submit-button' onclick='submit()'>submit</button>
 					</div>
 				</div>
 			</div>

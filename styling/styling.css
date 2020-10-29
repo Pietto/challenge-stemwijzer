@@ -258,30 +258,30 @@ button a{
 }
 
 
-.tooltip {
+.tooltip{
 	position: relative;
 	display: inline-block;
 }
 
-.tooltip .tooltiptext {
-	opacity: 0;
+.tooltip .tooltiptext{
+	display: none;
 	width: 300px;
 	background-color: black;
 	color: #fff;
 	text-align: center;
 	border-radius: 6px;
 	padding: 5px 0;
-
-	/* Position the tooltip */
-	position: absolute;
-	z-index: 1;
-
-	transition: .25s;
+	 transition: all 0.3s ease-out;
 }
 
-.tooltip:hover .tooltiptext {
-	opacity: 1;
-	transition: .25s;
+.tooltiptext{
+	position: absolute;
+	z-index: 1;
+}
+
+#toolipHover:hover .tooltiptext{
+	display: block;
+	transition: all 0.3s ease-out;
 }
 
 #push-list-items{
@@ -307,4 +307,30 @@ button a{
 	background-color: rgb(1,180,220);
 	height: 100%;
 	border-radius: 100vw;
+}
+
+#submit-button{
+	background-color: black;
+	border-radius: 2.5px;
+	transition: .25s;
+
+	width: 15vw;
+	height: 6vw
+	border: none;
+	margin: auto;
+
+	color: white;
+	font-family: Arial;
+	font-weight: bolder;
+	font-size: 40px;
+
+	position: relative;
+	left: 50%;
+	margin-left: -7.5vw;
+	margin-top: 15px;
+}
+
+#submit-button:hover{
+	background-color: rgb(1,180,220);
+	border-radius: 7.5px;
 }

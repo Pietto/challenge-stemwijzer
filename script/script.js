@@ -192,8 +192,8 @@ for(i = 0; i < 30; i++){
 
 
 //making the forum to add weight for specific subjects
-for(i=0; i<30; i++){
-	items = items + '<li class="opinions__item"> <input type="checkbox" id="checkbox'+ i +'" value="'+ titleCopy[i] +'" onclick="weight('+ i +')"><label></label><div class="tooltip"><span class="tooltip">'+ titles[i] +'<span class="tooltiptext">'+ explanations[i] +'</span></span></div></li>';
+for(i=0; i<subjects.length; i++){
+	items = items + '<li class="opinions__item"> <input type="checkbox" id="checkbox'+ i +'" value="'+ titleCopy[i] +'" onclick="weight('+ i +')"> <label></label><div class="tooltip"><span id="toolipHover" class="tooltip">'+ titles[i] +'<span class="tooltiptext">'+ explanations[i] +'</span></span></div></li>';
 }
 
 document.getElementById('push-list-items').innerHTML = items;
