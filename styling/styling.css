@@ -112,6 +112,10 @@ body{
 	border-radius: 7.5px;
 }
 
+button:hover{
+	cursor: pointer;
+}
+
 #main-content-bottom{
 	border-top: 2px dotted rgb(151,151,151);
 }
