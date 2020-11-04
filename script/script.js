@@ -266,7 +266,7 @@ function displayResults(){
 	h2_2.innerHTML = PartyScoreInOrder[0];
 
 	//display div and hide buttons
-	buttonDiv.style.display='block'; 
+	buttonDiv.style.display='block';
 	button1.style.display='none';
 	button2.style.display='none';
 	button3.style.display='none';
@@ -277,7 +277,9 @@ function displayResults(){
 	for(i=0; i<PartyScoreInOrder.length; i++){
 		partyPercentages.push(100/30*PartyMatches[PartyScoreInOrder[i]]);
 		partyPercentages[i] = Math.trunc(partyPercentages[i]);
-		/*Math.trunc*/
+		if(partyPercentages[i] > 100){
+			partyPercentages[i] = 100;
+		}
 	}
 
 	for(i=0; i<PartyScoreInOrder.length; i++){
