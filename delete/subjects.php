@@ -9,18 +9,14 @@
 	<script type="text/javascript">
 		
 
-		var object = {'a': 0, 'b': 0, 'c': 0};
-
-		var array = ['a','b','c'];
-
-		object[array[1]]++
-
-		console.log(object);
+		console.log(subjects);
+		console.log(parties);
 
 
-		
-
-		console.log(object);
+		setTimeout(function(){
+			parties[22].name = 'ABC';
+			console.log(parties);
+		}, 500);
 
 	</script>
 </body>

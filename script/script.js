@@ -1,7 +1,11 @@
+parties[22].name = '';
+
 var answers = [];										//array to push given answers in. format: ["pro", "none", "contra", "skip"]
 for(i=0; i<subjects.length; i++){
 	answers.push('');
 }
+
+var status = 'all';
 
 function backButton(){ 									//functionality of the button to go back
 	if(count == 0){ 
@@ -16,6 +20,10 @@ var button2 = document.getElementById('none');
 var button3 = document.getElementById('no');
 var button4 = document.getElementById('skip');
 
+var btn1;
+var btn2;
+var btn3;
+var btn4;
 
 button1.className = "buttons";
 button2.className = "buttons";
@@ -201,18 +209,58 @@ document.getElementById('push-list-items').innerHTML = items;
 //function when submitting the questions
 function submit(){
 	var results = [];
-	Results();
+	endscreen_subjects.innerHTML='';
+	h1_2.innerHTML='Wilt u nog sorteren op partijen?';
+	h2_2.innerHTML='';
+
+
+	btn1 = document.createElement('BUTTON');
+	btn1.innerHTML = 'alle partijen';
+	btn1.style.backgroundColor = "rgb(1,180,220)";
+	btn2 = document.createElement('BUTTON');
+	btn2.innerHTML = 'seculaire partijen';
+	btn3 = document.createElement('BUTTON');
+	btn3.innerHTML = 'grote partijen';
+	h2_2.appendChild(btn1);
+	h2_2.appendChild(btn2);
+	h2_2.appendChild(btn3);
+
+	btn1.onclick = function(){
+		status='all';
+		btn1.style.backgroundColor = "rgb(1,180,220)";
+		btn2.style.backgroundColor = "black";
+		btn3.style.backgroundColor = "black";
+	};
+	btn2.onclick = function(){
+		status='secularOnly';
+		btn1.style.backgroundColor = "black";
+		btn2.style.backgroundColor = "rgb(1,180,220)";
+		btn3.style.backgroundColor = "black";
+	};
+	btn3.onclick = function(){
+		status='bigOnly';
+		btn1.style.backgroundColor = "black";
+		btn2.style.backgroundColor = "black";
+		btn3.style.backgroundColor = "rgb(1,180,220)";
+	};
+
+	btn4 = document.createElement('BUTTON');
+	btn4.innerHTML = 'naar de berekening';
+	btn4.onclick = function(){
+		Results(status);
+		h2_2.remove();
+	};
+	h2_2.appendChild(btn4);
 }
 
 var h1_2 = document.getElementById('main-content-content-h1-2');
 var h2_2 = document.getElementById('main-content-content-h2-2');
 
 //displays correct text, then proceeds to go to the calculate function
-function Results(){
-	calculateResults();
-	h1_2.innerHTML = 'Uw mening komt het best overeen met:';
-	h2_2.innerHTML = '';
-	document.getElementById('endscreen-subjects').innerHTML = '';
+function Results(status){
+
+	calculateResults(status);
+	document.getElementById('main-content-content').remove();
 }
 
 var realPartyNames = [];
@@ -221,7 +269,7 @@ for(i=0; i<subjects[0].parties.length; i++){
 }
 
 //calculate results
-function calculateResults(){
+function calculateResults(status){
 	//part 1: comparing the given results with the opinions of the political parties, and giving them point accordingly
 		for(p=0; p<parties.length; p++){								//0:VVD
 			for(s=0; s<subjects.length; s++){							//0:bindend referendum
@@ -244,26 +292,33 @@ function calculateResults(){
 
 
 		//part 4: displaying results
-	setTimeout(function(){displayResults();},1);
+	setTimeout(function(){displayResults(status);},1);
 }
 
-function displayResults(){
-	h2_2.innerHTML = 'ERROR';
+function displayResults(status){
 
 	//	c = count, pn = party number, ps = party score
 
 	var PartyScoreInOrder = [];
 
-	for(c=100; c>0; c--){										//gives parties in order
+	for(c=100; c>=0; c--){										//gives parties in order
 		for(pn=0; pn<parties.length; pn++){
-			if(PartyMatches[parties[pn].name] == c){
-				PartyScoreInOrder.push(parties[pn].name);		//+'['+pn+']'
+			if(PartyMatches[parties[pn].name] == c && PartyMatches[parties[pn].name] != ''){
+				if(status == 'secularOnly'){
+					if(parties[pn].secular == true){
+						PartyScoreInOrder.push(parties[pn].name);	//+'['+pn+']'  DEVTOOL
+					}
+				}else if(status == 'bigOnly'){
+					if(parties[pn].size > 8){
+						PartyScoreInOrder.push(parties[pn].name);
+					}
+				}else{
+					PartyScoreInOrder.push(parties[pn].name);
+				}
 			}
 		}
 	}
 	console.log(PartyScoreInOrder);
-
-	h2_2.innerHTML = PartyScoreInOrder[0];
 
 	//display div and hide buttons
 	buttonDiv.style.display='block';
@@ -275,7 +330,7 @@ function displayResults(){
 	buttonDiv.innerHTML = '<h1>Overeenkomsten: </h1>';
 	var partyPercentages = [];
 	for(i=0; i<PartyScoreInOrder.length; i++){
-		partyPercentages.push(100/30*PartyMatches[PartyScoreInOrder[i]]);
+		partyPercentages.push(100/60*PartyMatches[PartyScoreInOrder[i]]);
 		partyPercentages[i] = Math.trunc(partyPercentages[i]);
 		if(partyPercentages[i] > 100){
 			partyPercentages[i] = 100;

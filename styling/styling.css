@@ -173,7 +173,7 @@ button a{
 	width: 0%;
 }
 
-#button-div button{
+#button-div button, #endscreen button{
 	width: 10vw;
 	height: 7vh;
 	margin-right: 2vw;
@@ -188,7 +188,7 @@ button a{
 	transition: .25s;
 }
 
-#button-div button:hover{
+#button-div button:hover, #endscreen button:hover{
 	background-color: rgb(1,180,220);
 	cursor: pointer;
 	border-radius: 7.5px;
@@ -253,7 +253,7 @@ button a{
 }
 
 
-#endscreen-subjects{
+#endscreen_subjects{
 	background-color: rgb(235,235,235);
 }
 

@@ -20,8 +20,8 @@
 				<div id='endscreen'>
 					<h1 id='main-content-content-h1-2'>Zijn er onderwerpen die u extra belangrijk vindt?</h1>
 					<h2 id='main-content-content-h2-2'>Aangevinkte stellingen tellen extra mee bij het berekenen van het resulaat.</h2>
-					<div id='endscreen-subjects'>
-						<h3>Extra belangrijke onderwerpen</h3>
+					<div id='endscreen_subjects'>
+						<h3 id='h3'>Extra belangrijke onderwerpen</h3>
 						<ul id='push-list-items'>
 						
 						</ul>
