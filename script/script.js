@@ -145,7 +145,7 @@ function checkAnswer(){
 			case 'skip':
 				button4.classList.add("activeButton");
 			default:
-				console.log('error on line ->');				//dev tool
+				console.log('error on line ->');
 		}
 	}
 }
@@ -347,13 +347,3 @@ function weight(number){
 		}
 	}
 }
-
-
-/*   dev notes:
-
-
--remove devtools
--Libertarische Partij shows up twice in the results
-
-
-*/
