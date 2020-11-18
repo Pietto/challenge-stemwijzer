@@ -37,15 +37,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- <details>
-		<summary>title</summary>
-		<details>
-			<summary>another title</summary>
-			<p>actual content</p>
-		</details>
-	</details> -->
-
 	<script type="text/javascript" src="script/script.js"></script>
 </body>
 </html>

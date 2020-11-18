@@ -1,42 +1,39 @@
-parties[22].name = '';
+parties[22].name = '';									//if parties need to be deleted, change the name to '' like shown here
 
 var answers = [];										//array to push given answers in. format: ["pro", "none", "contra", "skip"]
 for(i=0; i<subjects.length; i++){
 	answers.push('');
 }
 
-var status = 'all';
+var status = 'all';										//later, this var can be changed in order to filter the parties
 
 function backButton(){ 									//functionality of the button to go back
 	if(count == 0){ 
 		window.open('index.php','_self'); 
-	}else{ 
+	}else{
 		goToLastQuestion(); 
-	} 
+	}
 }
 
-var button1 = document.getElementById('yes');			//defining buttons in variable
+var button1 = document.getElementById('yes');			//defining main buttons in variable
 var button2 = document.getElementById('none');
 var button3 = document.getElementById('no');
 var button4 = document.getElementById('skip');
 
-var btn1;
+var btn1;												//declaring buttons for the filtering of parties
 var btn2;
 var btn3;
 var btn4;
 
-button1.className = "buttons";
+button1.className = "buttons";							//giving classnames to the main buttons
 button2.className = "buttons";
 button3.className = "buttons";
 button4.className = "buttons";
 var buttons = document.getElementsByClassName('buttons');
 var buttonDiv = document.getElementById('button-div');
+console.log(buttonDiv);
 
-//developer tool to check the subjects object, should be deleted in the final product
-console.log(subjects); 
-
-//animation of the button that allows you to go to the last question
-function move(x) { 
+function move(x) { 										//animation of the button which allowes you to go back
 	x.style.position = 'relative'; 
 	x.style.left = '-1vw'; 
 } 
@@ -44,7 +41,7 @@ function moveBack(x) {
 	x.style.left = '0px'; 
 }
 
-let count = 0; 											//hold a reference
+let count = 0; 											//reference to check which question is currently displayed
 
 var titleContent = '1. ' + subjects[0].title;			//giving the title and subtitle the correct content
 var statementContent = subjects[0].statement;
@@ -54,42 +51,42 @@ for(p=0; p<parties.length; p++){
 	PartyMatches[parties[p].name] = 0;
 }
 
-var h1 = document.getElementById('main-content-content-h1'); 
-var h2 = document.getElementById('main-content-content-h2'); 
+var h1 = document.getElementById('main-content-content-h1');
+var h2 = document.getElementById('main-content-content-h2');
 
 h1.innerHTML = titleContent; 
 h2.innerHTML = statementContent; 
 
 //giving the progressbar at the top the correct width for the start of the page
-//(this gives a simple smooth animation when the form has been started)
+//this gives a simple smooth animation when the form has been started
 setTimeout(function(){ 
 	document.getElementById('progress').style.width = 1/30*100+'%'; 
 },500);
 
 //function when the statement has been agreed upon
 function eens(){ 
-	answers[count]='pro';
+	answers[count] = 'pro';
 	count++
 	updateItems();
 }
 
 //function when no choice has been made
 function geenKeuze(){ 
-	answers[count]='none';
+	answers[count] = 'none';
 	count++
 	updateItems();
 }
 
 //function when the statement has been rejected
 function oneens(){
-	answers[count]='contra';
+	answers[count] = 'contra';
 	count++
 	updateItems();
 }
 
 //function when the statement has been skipped
 function skip(){
-	answers[count]='skip';
+	answers[count] = 'skip';
 	count++ 
 	updateItems();
 } 
@@ -106,12 +103,12 @@ function updateItems(){
 		var txt;
 		var r = confirm("Weet u zeker dat u naar de resultaten wilt gaan?");
 		if (r == true) {
-			document.getElementById('backbutton-div').style.display='none';
-			document.getElementById('main-content-content-h1').style.display='none';
-			document.getElementById('main-content-content-h2').style.display='none';
-			document.getElementById('button-div').style.display='none';
-			document.getElementById('endscreen').style.display='block';
-		} else {}
+			document.getElementById('backbutton-div').style.display = 'none';
+			document.getElementById('main-content-content-h1').style.display = 'none';
+			document.getElementById('main-content-content-h2').style.display = 'none';
+			document.getElementById('button-div').style.display = 'none';
+			document.getElementById('endscreen').style.display = 'block';
+		}else{}
 	}else{
 		removeHighlights();												//remove all highlights on buttons first
 		updateText(); 													//display new text
@@ -160,6 +157,7 @@ function removeHighlights(){									//removes highlights from buttons
 	button4.classList.remove('activeButton');
 }
 
+//some errors were in the give titles and explanations, so i defined my own here
 var titles = ['Bindend referendum', 'Maatschappelijke dienstplicht', 'Anoniem solliciteren', 'Groepsbelediging', 'Teelt en verkoop wiet', 'Vervroegde vrijlating', 'Vennootschapsbelasting', 'Belasting hoogste inkomens', 'Tijdelijke arbeidscontracten', 'AOW-leeftijd 65', 'Verzekering zzp\'ers',' Leenstelsel studenten', 'Geld cultuur', 'Islamitische immigranten', 'Kinderpardon', 'Onderdak illegalen', 'Hypotheekrente', 'Verhuurdersheffing', 'Schiphol', 'Kilometerheffing', 'Nieuwe wegen', 'Kolencentrales', 'Btw-tarief vlees', 'Voltooid leven', 'Afschaffing eigen risico', 'Landelijk zorgfonds', 'Defensie-uitgaven', 'Europees leger', 'Ontwikkelingshulp', 'EU-lidmaatschap'];
 var explanations = ['"Er moet een bindend referendum komen, waarmee burgers door het parlement aangenomen wetten kunnen tegenhouden."',
 '"Er moet een maatschappelijke dienstplicht voor jongeren komen. Zij kunnen dan dienen in het leger, bij de politie of in de zorg."',
@@ -193,28 +191,27 @@ var explanations = ['"Er moet een bindend referendum komen, waarmee burgers door
 '"Nederland moet uit de Europese Unie (EU) stappen."'];
 
 var items = '';
-var titleCopy = [];
+var titleCopy = [];										//maked a copy of the title, without spaces
 for(i = 0; i < 30; i++){
     titleCopy[i] = titles[i].replace(' ', '');
 }
 
 
 //making the forum to add weight for specific subjects
+//extra weight will be instantly added or removed
 for(i=0; i<subjects.length; i++){
 	items = items + '<li class="opinions__item"> <input type="checkbox" id="checkbox'+ i +'" value="'+ titleCopy[i] +'" onclick="weight('+ i +')"> <label></label><div class="tooltip"><span id="toolipHover" class="tooltip">'+ titles[i] +'<span class="tooltiptext">'+ explanations[i] +'</span></span></div></li>';
 }
-
 document.getElementById('push-list-items').innerHTML = items;
 
 //function when submitting the questions
 function submit(){
 	var results = [];
-	endscreen_subjects.innerHTML='';
-	h1_2.innerHTML='Wilt u nog sorteren op partijen?';
-	h2_2.innerHTML='';
+	endscreen_subjects.innerHTML = '';
+	h1_2.innerHTML = 'Wilt u nog sorteren op partijen?';
+	h2_2.innerHTML = '';
 
-
-	btn1 = document.createElement('BUTTON');
+	btn1 = document.createElement('BUTTON');				//creates buttons to filter the parties
 	btn1.innerHTML = 'alle partijen';
 	btn1.style.backgroundColor = "rgb(1,180,220)";
 	btn2 = document.createElement('BUTTON');
@@ -247,7 +244,7 @@ function submit(){
 	btn4 = document.createElement('BUTTON');
 	btn4.innerHTML = 'naar de berekening';
 	btn4.onclick = function(){
-		Results(status);
+		calculateResults(status);
 		h2_2.remove();
 	};
 	h2_2.appendChild(btn4);
@@ -255,13 +252,6 @@ function submit(){
 
 var h1_2 = document.getElementById('main-content-content-h1-2');
 var h2_2 = document.getElementById('main-content-content-h2-2');
-
-//displays correct text, then proceeds to go to the calculate function
-function Results(status){
-
-	calculateResults(status);
-	document.getElementById('main-content-content').remove();
-}
 
 var realPartyNames = [];
 for(i=0; i<subjects[0].parties.length; i++){
@@ -271,8 +261,8 @@ for(i=0; i<subjects[0].parties.length; i++){
 //calculate results
 function calculateResults(status){
 	//part 1: comparing the given results with the opinions of the political parties, and giving them point accordingly
-		for(p=0; p<parties.length; p++){								//0:VVD
-			for(s=0; s<subjects.length; s++){							//0:bindend referendum
+		for(p=0; p<parties.length; p++){
+			for(s=0; s<subjects.length; s++){
 				for(m=0; m<subjects[s].parties.length; m++){
 					if(subjects[s].parties[m].name == parties[p].name){
 						if(subjects[s].parties[m].position == answers[s]){
@@ -284,14 +274,11 @@ function calculateResults(status){
 		}
 		console.table(PartyMatches);
 
-		//part 2: extra points for opinions that are, according to the player, more important
+		//extra points should already be added by now
 
-		//part 3: returning a percentage of common answers/total amount of questions
+		//final percentage will be calculated later
 
-
-
-
-		//part 4: displaying results
+		//small time out to prevent weird buggs from happening
 	setTimeout(function(){displayResults(status);},1);
 }
 
@@ -299,14 +286,14 @@ function displayResults(status){
 
 	//	c = count, pn = party number, ps = party score
 
-	var PartyScoreInOrder = [];
+	var PartyScoreInOrder = [];									//array which contains all scores of the parties, in order from highest to lowest
 
 	for(c=100; c>=0; c--){										//gives parties in order
 		for(pn=0; pn<parties.length; pn++){
 			if(PartyMatches[parties[pn].name] == c && PartyMatches[parties[pn].name] != ''){
 				if(status == 'secularOnly'){
 					if(parties[pn].secular == true){
-						PartyScoreInOrder.push(parties[pn].name);	//+'['+pn+']'  DEVTOOL
+						PartyScoreInOrder.push(parties[pn].name);
 					}
 				}else if(status == 'bigOnly'){
 					if(parties[pn].size > 8){
@@ -318,33 +305,41 @@ function displayResults(status){
 			}
 		}
 	}
-	console.log(PartyScoreInOrder);
+	h1_2.innerHTML = '';
+	buttonDiv.style.marginTop = '-17.5vh';
 
-	//display div and hide buttons
-	buttonDiv.style.display='block';
-	button1.style.display='none';
-	button2.style.display='none';
-	button3.style.display='none';
-	button4.style.display='none';
+	buttonDiv.style.display = 'block';							//display div and hide buttons 
+	button1.style.display = 'none';
+	button2.style.display = 'none';
+	button3.style.display = 'none';
+	button4.style.display = 'none';
 
 	buttonDiv.innerHTML = '<h1>Overeenkomsten: </h1>';
 	var partyPercentages = [];
-	for(i=0; i<PartyScoreInOrder.length; i++){
+	for(i=0; i<PartyScoreInOrder.length; i++){										
 		partyPercentages.push(100/60*PartyMatches[PartyScoreInOrder[i]]);
 		partyPercentages[i] = Math.trunc(partyPercentages[i]);
-		if(partyPercentages[i] > 100){
+		if(partyPercentages[i] > 100){									//if score is higher than 100%, it will still be displayed as 100% in order to prevent the end-user from seeing my terribly coded mistake
 			partyPercentages[i] = 100;
+			console.log('ERROR: party percentage higher than 100%')
 		}
 	}
-
+	//creates the list with parties in <h3> tag, % score
 	for(i=0; i<PartyScoreInOrder.length; i++){
-		buttonDiv.innerHTML = buttonDiv.innerHTML + '<h3>'+PartyScoreInOrder[i]+', '+partyPercentages[i]+'%</h3>'+
-		'<div class="PBPS"><div class="PBPSI" id="PBPSI'+i+'" style="width:1%";></div></div>';
+		buttonDiv.innerHTML = buttonDiv.innerHTML + '<h3>' + PartyScoreInOrder[i] + ', ' + partyPercentages[i] + '%</h3>' +
+		'<div class="PBPS"><div class="PBPSI" id="PBPSI' + i + '" style="width:1%";></div></div>';
+		console.log('reached');
 	}
-	setTimeout(function(){for(i=0; i<PartyScoreInOrder.length; i++){document.getElementById('PBPSI'+i).style.width=partyPercentages[i]+'%';}},500);
-}				/*must use partyPercentages, developer tool*/
+	//progressbar fills after 1/2 second to desired %. progressbar displays from 0% to 100%
+	setTimeout(function(){
+		for(i=0; i<PartyScoreInOrder.length; i++){
+			document.getElementById('PBPSI'+i).style.width=partyPercentages[i] + '%';
+		}
+	},500);
+}
 
 
+//function adds weight to statements that are more important to the player
 function weight(number){
 	for(i=0; i<subjects[number].parties.length; i++){
 		if(subjects[number].parties[i].position == answers[number]){
