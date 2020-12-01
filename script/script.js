@@ -1,37 +1,61 @@
 parties[22].name = '';									//if parties need to be deleted, change the name to '' like shown here
-
 var answers = [];										//array to push given answers in. format: ["pro", "none", "contra", "skip"]
 for(i=0; i<subjects.length; i++){
 	answers.push('');
 }
-
 var status = 'all';										//later, this var can be changed in order to filter the parties
-
-function backButton(){ 									//functionality of the button to go back
-	if(count == 0){ 
-		window.open('index.php','_self'); 
-	}else{
-		goToLastQuestion(); 
-	}
-}
-
 var button1 = document.getElementById('yes');			//defining main buttons in variable
 var button2 = document.getElementById('none');
 var button3 = document.getElementById('no');
 var button4 = document.getElementById('skip');
-
-var btn1;												//declaring buttons for the filtering of parties
-var btn2;
-var btn3;
-var btn4;
-
 button1.className = "buttons";							//giving classnames to the main buttons
 button2.className = "buttons";
 button3.className = "buttons";
 button4.className = "buttons";
+var btn1;												//declaring buttons for the filtering of parties
+var btn2;
+var btn3;
+var btn4;
 var buttons = document.getElementsByClassName('buttons');
 var buttonDiv = document.getElementById('button-div');
-console.log(buttonDiv);
+let count = 0; 											//reference to check which question is currently displayed
+var titleContent = '1. ' + subjects[0].title;			//giving the title and subtitle the correct content
+var statementContent = subjects[0].statement;
+var PartyMatches = [];									//reference of how many points eacht party gets
+for(p=0; p<parties.length; p++){
+	PartyMatches[parties[p].name] = 0;
+}
+var h1 = document.getElementById('main-content-content-h1');
+var h2 = document.getElementById('main-content-content-h2');
+h1.innerHTML = titleContent; 
+h2.innerHTML = statementContent; 
+var h1_2 = document.getElementById('main-content-content-h1-2');
+var h2_2 = document.getElementById('main-content-content-h2-2');
+var realPartyNames = [];
+for(i=0; i<subjects[0].parties.length; i++){
+	realPartyNames.push(subjects[0].parties[i].name);
+}
+var items = '';
+var titleCopy = [];										//maked a copy of the title, without spaces
+for(i = 0; i < 30; i++){
+    titleCopy[i] = titles[i].replace(' ', '');			//var titles is imported from script/extra/titles
+}
+
+
+//giving the progressbar at the top the correct width for the start of the page
+//this gives a simple smooth animation when the form has been started
+setTimeout(function(){ 
+	document.getElementById('progress').style.width = 1/30*100+'%'; 
+},500);
+
+//functionality of the button to go back
+function backButton(){
+	if(count == 0){ 
+		window.open('index.html','_self'); 
+	}else{
+		goToLastQuestion(); 
+	}
+}
 
 function move(x) { 										//animation of the button which allowes you to go back
 	x.style.position = 'relative'; 
@@ -40,28 +64,6 @@ function move(x) { 										//animation of the button which allowes you to go b
 function moveBack(x) { 
 	x.style.left = '0px'; 
 }
-
-let count = 0; 											//reference to check which question is currently displayed
-
-var titleContent = '1. ' + subjects[0].title;			//giving the title and subtitle the correct content
-var statementContent = subjects[0].statement;
-
-var PartyMatches = [];									//reference of how many points eacht party gets
-for(p=0; p<parties.length; p++){
-	PartyMatches[parties[p].name] = 0;
-}
-
-var h1 = document.getElementById('main-content-content-h1');
-var h2 = document.getElementById('main-content-content-h2');
-
-h1.innerHTML = titleContent; 
-h2.innerHTML = statementContent; 
-
-//giving the progressbar at the top the correct width for the start of the page
-//this gives a simple smooth animation when the form has been started
-setTimeout(function(){ 
-	document.getElementById('progress').style.width = 1/30*100+'%'; 
-},500);
 
 //function when the statement has been agreed upon
 function eens(){ 
@@ -157,46 +159,6 @@ function removeHighlights(){									//removes highlights from buttons
 	button4.classList.remove('activeButton');
 }
 
-//some errors were in the give titles and explanations, so i defined my own here
-var titles = ['Bindend referendum', 'Maatschappelijke dienstplicht', 'Anoniem solliciteren', 'Groepsbelediging', 'Teelt en verkoop wiet', 'Vervroegde vrijlating', 'Vennootschapsbelasting', 'Belasting hoogste inkomens', 'Tijdelijke arbeidscontracten', 'AOW-leeftijd 65', 'Verzekering zzp\'ers',' Leenstelsel studenten', 'Geld cultuur', 'Islamitische immigranten', 'Kinderpardon', 'Onderdak illegalen', 'Hypotheekrente', 'Verhuurdersheffing', 'Schiphol', 'Kilometerheffing', 'Nieuwe wegen', 'Kolencentrales', 'Btw-tarief vlees', 'Voltooid leven', 'Afschaffing eigen risico', 'Landelijk zorgfonds', 'Defensie-uitgaven', 'Europees leger', 'Ontwikkelingshulp', 'EU-lidmaatschap'];
-var explanations = ['"Er moet een bindend referendum komen, waarmee burgers door het parlement aangenomen wetten kunnen tegenhouden."',
-'"Er moet een maatschappelijke dienstplicht voor jongeren komen. Zij kunnen dan dienen in het leger, bij de politie of in de zorg."',
-'"Om discriminatie op basis van de naam te voorkomen, moet anoniem solliciteren bij de overheid en bij openbare instellingen de regel worden."',
-'"Belediging van groepen op grond van ras, godsdienst of geaardheid moet niet langer strafbaar zijn."',
-'"De teelt en verkoop van wiet moet legaal worden."',
-'"De vervroegde vrijlating onder voorwaarden van gevangenen moet stoppen. Zij moeten hun straf helemaal uitzitten."',
-'"De belasting over de winst van ondernemingen (vennootschapsbelasting) moet omlaag."',
-'"De hoogste inkomensgroepen moeten meer belasting gaan betalen."',
-'"De periode waarbinnen je meerdere tijdelijke arbeidscontracten na elkaar kunt afsluiten, moet langer worden dan twee jaar."',
-'"De AOW-leeftijd moet weer 65 jaar worden."',
-'"Er moet een verplichte verzekering tegen arbeidsongeschiktheid en ziekte komen voor alle zelfstandigen zonder personeel (zzp\'ers)."',
-'"Het leenstelsel voor studenten moet worden afgeschaft. De basisbeurs moet weer terugkomen."',
-'"Er moet meer geld naar kunst en cultuur."',
-'"Nederland moet de grenzen sluiten voor islamitische immigranten."',
-'"In Nederland opgegroeide kinderen van asielzoekers moeten hier kunnen blijven (kinderpardon)."',
-'"De regering moet gemeenten verbieden illegale vreemdelingen onderdak te geven."',
-'"De regeling voor de aftrek van de hypotheekrente moet niet verder worden aangetast."',
-'"Woningcorporaties moeten meer goedkope huurwoningen bouwen. Daarom moet de belasting die zij betalen over huurwoningen (verhuurdersheffing) worden afgeschaft."',
-'"Luchthaven Schiphol moet kunnen uitbreiden."',
-'"De regering moet niet het bezit van de auto, maar het aantal gereden kilometers belasten."',
-'"Er moet meer geld naar de aanleg van nieuwe wegen."',
-'"Alle kolencentrales mogen voorlopig open blijven."',
-'"Voor vlees moet het hoge btw-tarief van 21 procent gaan gelden."',
-'"Ouderen die vinden dat hun leven voltooid is moeten hulp kunnen krijgen om een einde aan hun leven te maken."',
-'"Het eigen risico in de zorg moet worden afgeschaft, ook als dat betekent dat de premies omhoog gaan."',
-'"Er moet een landelijk zorgfonds komen, zodat het stelsel van particuliere zorgverzekeraars kan verdwijnen."',
-'"De uitgaven voor defensie moeten de komende jaren fors omhoog naar 2 procent van het nationale inkomen (de NAVO-norm)."',
-'"Er moet een Europees leger komen."',
-'"Nederland moet meer geld uitgeven voor de ontwikkeling van arme landen."',
-'"Nederland moet uit de Europese Unie (EU) stappen."'];
-
-var items = '';
-var titleCopy = [];										//maked a copy of the title, without spaces
-for(i = 0; i < 30; i++){
-    titleCopy[i] = titles[i].replace(' ', '');
-}
-
-
 //making the forum to add weight for specific subjects
 //extra weight will be instantly added or removed
 for(i=0; i<subjects.length; i++){
@@ -250,17 +212,9 @@ function submit(){
 	h2_2.appendChild(btn4);
 }
 
-var h1_2 = document.getElementById('main-content-content-h1-2');
-var h2_2 = document.getElementById('main-content-content-h2-2');
-
-var realPartyNames = [];
-for(i=0; i<subjects[0].parties.length; i++){
-	realPartyNames.push(subjects[0].parties[i].name);
-}
-
 //calculate results
 function calculateResults(status){
-	//part 1: comparing the given results with the opinions of the political parties, and giving them point accordingly
+	//part 1: comparing the given results with the opinions of the political parties, and giving them points accordingly
 		for(p=0; p<parties.length; p++){
 			for(s=0; s<subjects.length; s++){
 				for(m=0; m<subjects[s].parties.length; m++){
@@ -272,7 +226,6 @@ function calculateResults(status){
 				}
 			}
 		}
-		console.table(PartyMatches);
 
 		//extra points should already be added by now
 
@@ -328,7 +281,6 @@ function displayResults(status){
 	for(i=0; i<PartyScoreInOrder.length; i++){
 		buttonDiv.innerHTML = buttonDiv.innerHTML + '<h3>' + PartyScoreInOrder[i] + ', ' + partyPercentages[i] + '%</h3>' +
 		'<div class="PBPS"><div class="PBPSI" id="PBPSI' + i + '" style="width:1%";></div></div>';
-		console.log('reached');
 	}
 	//progressbar fills after 1/2 second to desired %. progressbar displays from 0% to 100%
 	setTimeout(function(){
